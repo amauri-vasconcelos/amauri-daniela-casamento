@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&family=Great+Vibes&family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;1,6..96,300;1,6..96,400&family=Ephesis&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
   :root {
     --bg-base:      #0C0806;
@@ -302,6 +303,38 @@
   .btn-card:hover { background:#007BB5; transform:translateY(-2px); }
   .mp-logo { display:flex; align-items:center; justify-content:center; gap:6px; margin-top:10px; }
   .mp-logo span { font-size:0.62rem; color:var(--txt-faint); letter-spacing:1px; }
+
+  /* ═══ STEP NOME ═══ */
+  .modal-step { display: none; }
+  .modal-step.active { display: block; }
+  .name-step-body { padding: 0 28px 32px; text-align: center; }
+  .name-step-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+  .name-step-msg {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.1rem; color: var(--txt-dim); line-height: 1.7; margin-bottom: 24px;
+  }
+  .name-input-wrap { position: relative; margin-bottom: 20px; }
+  .name-input {
+    width: 100%; background: var(--bg-3); border: 1px solid var(--border);
+    border-radius: 3px; padding: 14px 18px; font-family: 'Jost', sans-serif;
+    font-size: 1rem; color: var(--white); font-weight: 300;
+    outline: none; transition: border-color 0.3s;
+    caret-color: var(--terracota-cl);
+  }
+  .name-input::placeholder { color: var(--txt-faint); }
+  .name-input:focus { border-color: rgba(181,97,58,0.55); }
+  .btn-continuar {
+    width: 100%; padding: 14px; background: var(--terracota); color: #fff;
+    border: none; border-radius: 2px; cursor: pointer; font-family: 'Jost', sans-serif;
+    font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; font-weight: 300;
+    transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .btn-continuar:hover { background: var(--terracota-cl); transform: translateY(-2px); }
+  .btn-continuar:disabled { opacity: 0.4; cursor: default; transform: none; }
+  .name-skip { display: block; margin-top: 14px; font-size: 0.62rem; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--txt-faint); cursor: pointer;
+    background: none; border: none; font-family: 'Jost', sans-serif; transition: color 0.3s; }
+  .name-skip:hover { color: var(--txt-dim); }
 
   /* ═══ MAPA ═══ */
   #mapa { background: var(--bg-1); }
@@ -759,7 +792,27 @@
   <div class="footer-hearts">♥ &nbsp; ♥ &nbsp; ♥</div>
 </footer>
 
-<!-- MODAL -->
+<!-- MODAL IDENTIFICAÇÃO -->
+<div class="modal-overlay" id="nameModal">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeNameModal()">×</button>
+      <div class="modal-gift-name" id="name-modal-gift">–</div>
+      <div class="modal-gift-value" id="name-modal-value">–</div>
+    </div>
+    <div class="name-step-body">
+      <span class="name-step-icon">🎁</span>
+      <p class="name-step-msg">Que presente lindo! Antes de continuar,<br>como podemos te chamar?</p>
+      <div class="name-input-wrap">
+        <input class="name-input" id="giftGiverName" type="text" placeholder="Seu nome completo" maxlength="80" autocomplete="off" oninput="toggleContinuar()" onkeydown="if(event.key==='Enter')confirmarNome()">
+      </div>
+      <button class="btn-continuar" id="btnContinuar" onclick="confirmarNome()" disabled>Continuar para pagamento</button>
+      <button class="name-skip" onclick="confirmarNome(true)">Prefiro não informar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PAGAMENTO -->
 <div class="modal-overlay" id="giftModal">
   <div class="modal">
     <div class="modal-header">
@@ -886,34 +939,130 @@ gifts.forEach(g=>{
   grid.appendChild(c);
 });
 
-// ── MODAL
-function openModal(name,value){
-  document.getElementById('modal-name').textContent=name;
-  document.getElementById('modal-value').textContent=value;
+// ════════════════════════════════════════════════════
+//  EMAILJS — CONFIGURAÇÃO
+//  1. Crie conta gratuita em https://www.emailjs.com
+//  2. Crie um Email Service (Gmail, Outlook, etc.)
+//  3. Crie um Email Template com as variáveis:
+//     {{nome}}, {{presente}}, {{valor}}, {{data}}
+//  4. Substitua os 3 valores abaixo pelas suas chaves
+// ════════════════════════════════════════════════════
+const EMAILJS_PUBLIC_KEY  = 'YBTm1_p6gMvkwBspo';   // Account > API Keys
+const EMAILJS_SERVICE_ID  = 'service_yi0qgyb';   // Email Services
+const EMAILJS_TEMPLATE_ID = 'template_1puvwug';  // Email Templates
+
+// Inicializa EmailJS
+(function() {
+  try { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); } catch(e) {}
+})();
+
+// ── MODAL — fluxo com captura de nome
+let _pendingGift = null;
+
+function openModal(name, value) {
+  _pendingGift = { name, value };
+  document.getElementById('name-modal-gift').textContent = name;
+  document.getElementById('name-modal-value').textContent = value;
+  const inp = document.getElementById('giftGiverName');
+  inp.value = '';
+  document.getElementById('btnContinuar').disabled = true;
+  // Reset estado do botão
+  const btn = document.getElementById('btnContinuar');
+  btn.textContent = 'Continuar para pagamento';
+  btn.style.background = '';
+  document.getElementById('nameModal').classList.add('open');
+  setTimeout(() => inp.focus(), 200);
+}
+
+function toggleContinuar() {
+  const v = document.getElementById('giftGiverName').value.trim();
+  document.getElementById('btnContinuar').disabled = v.length < 2;
+}
+
+async function confirmarNome(skip) {
+  const giver = skip ? 'Anônimo' : document.getElementById('giftGiverName').value.trim();
+  if (!skip && giver.length < 2) return;
+
+  const btn = document.getElementById('btnContinuar');
+  if (!skip) {
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+  }
+
+  const registro = {
+    nome: giver,
+    presente: _pendingGift.name,
+    valor: _pendingGift.value,
+    data: new Date().toLocaleString('pt-BR')
+  };
+
+  // ── Salva localmente como backup
+  try {
+    const lista = JSON.parse(localStorage.getItem('presentes_registrados') || '[]');
+    lista.push(registro);
+    localStorage.setItem('presentes_registrados', JSON.stringify(lista));
+  } catch(e) {}
+
+  // ── Envia por email via EmailJS
+  if (EMAILJS_PUBLIC_KEY !== 'SUA_PUBLIC_KEY') {
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        nome:     registro.nome,
+        presente: registro.presente,
+        valor:    registro.valor,
+        data:     registro.data
+      });
+    } catch(e) {
+      console.warn('EmailJS erro:', e);
+      // Continua mesmo se o email falhar
+    }
+  }
+
+  // ── Fecha modal de nome, abre pagamento
+  document.getElementById('nameModal').classList.remove('open');
+  abrirPagamento(_pendingGift.name, _pendingGift.value);
+}
+
+function closeNameModal() {
+  document.getElementById('nameModal').classList.remove('open');
+  _pendingGift = null;
+}
+document.getElementById('nameModal').addEventListener('click', function(e) {
+  if (e.target === this) closeNameModal();
+});
+
+function abrirPagamento(name, value) {
+  document.getElementById('modal-name').textContent = name;
+  document.getElementById('modal-value').textContent = value;
   document.getElementById('giftModal').classList.add('open');
   generateQR();
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   document.querySelector('.tab-btn').classList.add('active');
   document.getElementById('tab-pix').classList.add('active');
-  document.getElementById('copyFeedback').textContent='';
+  document.getElementById('copyFeedback').textContent = '';
 }
-function closeModal(){document.getElementById('giftModal').classList.remove('open');}
-document.getElementById('giftModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
-function switchTab(tab,btn){
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
-  btn.classList.add('active');document.getElementById('tab-'+tab).classList.add('active');
+
+function closeModal() { document.getElementById('giftModal').classList.remove('open'); }
+document.getElementById('giftModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active'); document.getElementById('tab-' + tab).classList.add('active');
 }
-function copyPix(){
-  navigator.clipboard.writeText('da1d7878-07e3-4cf6-8758-b2d99b2bf07b').then(()=>{
-    const fb=document.getElementById('copyFeedback');fb.textContent='✓ Chave copiada com sucesso!';setTimeout(()=>fb.textContent='',2500);
+function copyPix() {
+  navigator.clipboard.writeText('da1d7878-07e3-4cf6-8758-b2d99b2bf07b').then(() => {
+    const fb = document.getElementById('copyFeedback');
+    fb.textContent = '✓ Chave copiada com sucesso!';
+    setTimeout(() => fb.textContent = '', 2500);
   });
 }
-function generateQR(){
-  const g=document.getElementById('qrGrid');g.innerHTML='';
-  [1,1,1,1,1,1,1,0,1,0,0,0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,0,0,1,0,1,0,1,0,1].forEach(v=>{
-    const c=document.createElement('div');c.className='qr-cell';c.style.background=v?'var(--gold)':'transparent';g.appendChild(c);
+function generateQR() {
+  const g = document.getElementById('qrGrid'); g.innerHTML = '';
+  [1,1,1,1,1,1,1,0,1,0,0,0,0,0,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0,1,0,1,1,1,1,1,1,1,0,0,1,0,1,0,1,0,1].forEach(v => {
+    const c = document.createElement('div'); c.className = 'qr-cell';
+    c.style.background = v ? 'var(--gold)' : 'transparent'; g.appendChild(c);
   });
 }
 </script>
