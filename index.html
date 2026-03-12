@@ -101,7 +101,7 @@
   @keyframes cRXY { from{opacity:0;transform:scale(-1.3)} to{opacity:1;transform:scale(-1)} }
 
   /* ── HERO CONTENT ── */
-  .hero-content { position: relative; z-index: 8; padding: 68px 20px 60px; max-width: 900px; margin: 0 auto; width: 100%; }
+  .hero-content { position: relative; z-index: 8; padding: 52px 20px 44px; max-width: 900px; margin: 0 auto; width: 100%; }
   .hero-pre { display: inline-flex; align-items: center; gap: 14px; font-size: 0.58rem; letter-spacing: 6px; text-transform: uppercase; color: rgba(181,97,58,0.72); margin-bottom: 32px; font-weight: 300; opacity: 0; animation: sUp 1s cubic-bezier(0.22,1,0.36,1) 0.4s forwards; }
   .hero-pre::before, .hero-pre::after { content: ''; display: block; width: 28px; height: 1px; }
   .hero-pre::before { background: linear-gradient(to right, transparent, rgba(181,97,58,0.55)); }
@@ -322,6 +322,40 @@
   .footer-msg { font-size:0.86rem; font-weight:300; line-height:1.85; max-width:360px; margin:0 auto; }
   .footer-hearts { margin-top:22px; font-size:0.9rem; letter-spacing:8px; opacity:0.3; }
 
+  /* ═══ TRAJES ═══ */
+  #trajes { background: var(--bg-2); }
+  .trajes-intro { color: var(--txt-dim); font-size: 0.9rem; font-weight: 300; max-width: 480px; margin: 0 auto 48px; line-height: 1.85; text-align: center; }
+  .trajes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 720px; margin: 0 auto; }
+  .traje-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 3px; padding: 32px 28px; text-align: center;
+    position: relative; overflow: hidden;
+    transition: border-color 0.35s, box-shadow 0.35s;
+  }
+  .traje-card:hover { border-color: var(--border-hover); box-shadow: 0 12px 40px rgba(0,0,0,0.45); }
+  .traje-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+  .traje-card.noivos::before  { background: linear-gradient(to right, #2a4a7f, #fff); }
+  .traje-card.padrinhos::before { background: linear-gradient(to right, #7a7a7a, #B5613A); }
+  .traje-role {
+    font-size: 0.58rem; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--oliva-cl); margin-bottom: 14px; display: block; font-weight: 400;
+  }
+  .traje-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; color: var(--white); font-style: italic;
+    margin-bottom: 22px; font-weight: 400;
+  }
+  .traje-cores { display: flex; flex-direction: column; gap: 12px; }
+  .traje-cor {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 2px; padding: 10px 14px;
+  }
+  .traje-swatch { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.10); }
+  .traje-cor-info { text-align: left; }
+  .traje-cor-who { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--txt-faint); display: block; }
+  .traje-cor-name { font-size: 0.88rem; color: var(--txt); font-weight: 300; }
+
   /* ═══ RESPONSIVE ═══ */
   @media (max-width: 768px) {
     .nav-links { display:none; }
@@ -344,9 +378,9 @@
     .tl-cap { font-size:1.1rem; }
     .tl-text { font-size:0.92rem; }
 
-    .maps-grid { grid-template-columns:1fr; }
+    .trajes-grid { grid-template-columns: 1fr; }
     .gifts-grid { grid-template-columns:1fr 1fr; gap:10px; }
-    .hero-content { padding:68px 16px 60px; }
+    .hero-content { padding:52px 16px 44px; }
     .cd-item { min-width:58px; }
     .cd-card { padding:12px 8px 8px; }
     .cd-sep { font-size:1.6rem; padding-top:8px; }
@@ -379,6 +413,7 @@
     <li><a href="#historia">Nossa História</a></li>
     <li><a href="#cerimonia">Cerimônia</a></li>
     <li><a href="#recepcao">Recepção</a></li>
+    <li><a href="#trajes">Trajes</a></li>
     <li><a href="#confirmacao">Confirmar</a></li>
     <li><a href="#presentes">Presentes</a></li>
     <li><a href="#mapa">Local</a></li>
@@ -393,6 +428,7 @@
   <a href="#historia" onclick="toggleMenu()">Nossa História</a>
   <a href="#cerimonia" onclick="toggleMenu()">Cerimônia</a>
   <a href="#recepcao" onclick="toggleMenu()">Recepção</a>
+  <a href="#trajes" onclick="toggleMenu()">Trajes</a>
   <a href="#confirmacao" onclick="toggleMenu()">Confirmar Presença</a>
   <a href="#presentes" onclick="toggleMenu()">Lista de Presentes</a>
   <a href="#mapa" onclick="toggleMenu()">Local</a>
@@ -444,10 +480,6 @@
       <div class="cd-item"><div class="cd-card"><span class="cd-num" id="cd-mins">--</span></div><span class="cd-label">Min</span></div>
       <div class="cd-sep">:</div>
       <div class="cd-item"><div class="cd-card"><span class="cd-num" id="cd-secs">--</span></div><span class="cd-label">Seg</span></div>
-    </div>
-    <div class="hero-btns">
-      <a href="#confirmacao" class="btn-primary">Confirmar Presença</a>
-      <a href="#presentes" class="btn-outline">Lista de Presentes</a>
     </div>
   </div>
   <div class="hero-scroll"><span>Rolar</span><div class="scroll-line"></div></div>
@@ -607,6 +639,65 @@
       <div class="event-time">⏰ &nbsp; 22h00 · 27 de Junho de 2026</div>
       <div class="event-address">Av. Desembargador Gonzaga, 675<br>Cidade dos Funcionários<br>Fortaleza – CE, 60823-000</div>
       <a href="https://maps.google.com/?q=Av.+Desembargador+Gonzaga,+675,+Fortaleza,+CE" target="_blank" class="btn-map">📍 &nbsp; Ver no Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRAJES -->
+<section id="trajes">
+  <div class="section-inner">
+    <div style="text-align:center" class="reveal">
+      <span class="section-badge">Venha bem vestido</span>
+      <h2 class="section-title">Sugestão de <em>Trajes</em></h2>
+      <div class="section-divider"></div>
+      <p class="trajes-intro">O traje sugerido é <strong style="color:var(--white);font-weight:400">Sport Fino</strong>. Para nos ajudar a compor uma paleta harmoniosa, confira as cores dos noivos e padrinhos.</p>
+    </div>
+    <div class="trajes-grid">
+
+      <!-- NOIVOS -->
+      <div class="traje-card noivos reveal">
+        <span class="traje-role">Noivos</span>
+        <div class="traje-title">Os Protagonistas</div>
+        <div class="traje-cores">
+          <div class="traje-cor">
+            <div class="traje-swatch" style="background:#2a4a7f"></div>
+            <div class="traje-cor-info">
+              <span class="traje-cor-who">Noivo</span>
+              <span class="traje-cor-name">Terno Azul</span>
+            </div>
+          </div>
+          <div class="traje-cor">
+            <div class="traje-swatch" style="background:#F5F0EA;border-color:rgba(255,255,255,0.25)"></div>
+            <div class="traje-cor-info">
+              <span class="traje-cor-who">Noiva</span>
+              <span class="traje-cor-name">Vestido Branco</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PADRINHOS -->
+      <div class="traje-card padrinhos reveal">
+        <span class="traje-role">Padrinhos &amp; Madrinhas</span>
+        <div class="traje-title">A Corte</div>
+        <div class="traje-cores">
+          <div class="traje-cor">
+            <div class="traje-swatch" style="background:#7a7a7a"></div>
+            <div class="traje-cor-info">
+              <span class="traje-cor-who">Padrinhos</span>
+              <span class="traje-cor-name">Terno Cinza</span>
+            </div>
+          </div>
+          <div class="traje-cor">
+            <div class="traje-swatch" style="background:#B5613A"></div>
+            <div class="traje-cor-info">
+              <span class="traje-cor-who">Madrinhas</span>
+              <span class="traje-cor-name">Vestido Terracota</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
