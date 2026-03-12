@@ -59,7 +59,7 @@
   .mobile-close { position: absolute; top: 20px; right: 24px; background: none; border: none; font-size: 1.6rem; cursor: pointer; color: var(--txt-dim); }
 
   /* ═══ HERO ═══ */
-  #hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; text-align: center; background: var(--bg-base); }
+  #hero { position: relative; min-height: 92svh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; text-align: center; background: var(--bg-base); }
 
   .hero-aurora { position: absolute; inset: 0; z-index: 0; animation: auroraShift 14s ease-in-out infinite alternate; }
   @keyframes auroraShift {
@@ -101,7 +101,7 @@
   @keyframes cRXY { from{opacity:0;transform:scale(-1.3)} to{opacity:1;transform:scale(-1)} }
 
   /* ── HERO CONTENT ── */
-  .hero-content { position: relative; z-index: 8; padding: 120px 20px 80px; max-width: 900px; margin: 0 auto; width: 100%; }
+  .hero-content { position: relative; z-index: 8; padding: 100px 20px 60px; max-width: 900px; margin: 0 auto; width: 100%; }
   .hero-pre { display: inline-flex; align-items: center; gap: 14px; font-size: 0.58rem; letter-spacing: 6px; text-transform: uppercase; color: rgba(181,97,58,0.72); margin-bottom: 32px; font-weight: 300; opacity: 0; animation: sUp 1s cubic-bezier(0.22,1,0.36,1) 0.4s forwards; }
   .hero-pre::before, .hero-pre::after { content: ''; display: block; width: 28px; height: 1px; }
   .hero-pre::before { background: linear-gradient(to right, transparent, rgba(181,97,58,0.55)); }
@@ -174,7 +174,7 @@
   .btn-outline:hover { border-color:rgba(181,97,58,0.5); color:#fff; transform:translateY(-3px); }
   .btn-outline:hover::before { opacity:1; }
 
-  .hero-scroll { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 8; opacity: 0; animation: fadeIn 1s 2.4s forwards; }
+  .hero-scroll { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 8; opacity: 0; animation: fadeIn 1s 2.4s forwards; }
   .hero-scroll span { font-size: 0.48rem; letter-spacing: 5px; text-transform: uppercase; color: rgba(181,97,58,0.4); }
   .scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, rgba(181,97,58,0.65), transparent); transform-origin: top; animation: scrollDrop 2.5s 2.8s ease-in-out infinite; }
   @keyframes scrollDrop { 0%{transform:scaleY(0);opacity:0;transform-origin:top} 50%{transform:scaleY(1);opacity:1;transform-origin:top} 51%{transform-origin:bottom} 100%{transform:scaleY(0);opacity:0;transform-origin:bottom} }
