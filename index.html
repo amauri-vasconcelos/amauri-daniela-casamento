@@ -101,7 +101,7 @@
   @keyframes cRXY { from{opacity:0;transform:scale(-1.3)} to{opacity:1;transform:scale(-1)} }
 
   /* ── HERO CONTENT ── */
-  .hero-content { position: relative; z-index: 8; padding: 52px 20px 44px; max-width: 900px; margin: 0 auto; width: 100%; }
+  .hero-content { position: relative; z-index: 8; padding: 18px 20px 44px; max-width: 900px; margin: 0 auto; width: 100%; }
   .hero-pre { display: inline-flex; align-items: center; gap: 14px; font-size: 0.58rem; letter-spacing: 6px; text-transform: uppercase; color: rgba(181,97,58,0.72); margin-bottom: 32px; font-weight: 300; opacity: 0; animation: sUp 1s cubic-bezier(0.22,1,0.36,1) 0.4s forwards; }
   .hero-pre::before, .hero-pre::after { content: ''; display: block; width: 28px; height: 1px; }
   .hero-pre::before { background: linear-gradient(to right, transparent, rgba(181,97,58,0.55)); }
@@ -337,14 +337,11 @@
   .traje-card.noivos::before  { background: linear-gradient(to right, #2a4a7f, #fff); }
   .traje-card.padrinhos::before { background: linear-gradient(to right, #7a7a7a, #B5613A); }
   .traje-role {
-    font-size: 0.58rem; letter-spacing: 5px; text-transform: uppercase;
-    color: var(--oliva-cl); margin-bottom: 14px; display: block; font-weight: 400;
-  }
-  .traje-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.5rem; color: var(--white); font-style: italic;
-    margin-bottom: 22px; font-weight: 400;
+    margin-bottom: 22px; display: block; font-weight: 400;
   }
+  .traje-title { display: none; }
   .traje-cores { display: flex; flex-direction: column; gap: 12px; }
   .traje-cor {
     display: flex; align-items: center; gap: 14px;
@@ -380,7 +377,7 @@
 
     .trajes-grid { grid-template-columns: 1fr; }
     .gifts-grid { grid-template-columns:1fr 1fr; gap:10px; }
-    .hero-content { padding:52px 16px 44px; }
+    .hero-content { padding:18px 16px 44px; }
     .cd-item { min-width:58px; }
     .cd-card { padding:12px 8px 8px; }
     .cd-sep { font-size:1.6rem; padding-top:8px; }
