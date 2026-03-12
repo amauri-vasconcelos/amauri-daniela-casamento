@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniela &amp; Amauri · 27 de Junho de 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bege: #F5EFE6;
+    --bege-escuro: #EAD9C5;
+    --terracota: #B5613A;
+    --terracota-claro: #C97F5E;
+    --marrom: #6B4423;
+    --marrom-claro: #9E7251;
+    --verde-oliva: #6B7C5C;
+    --verde-oliva-claro: #8A9E78;
+    --branco: #FEFCF8;
+    --texto: #3D2B1F;
+    --texto-suave: #7A5C48;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--branco);
+    color: var(--texto);
+    overflow-x: hidden;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bege); }
+  ::-webkit-scrollbar-thumb { background: var(--terracota); border-radius: 2px; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: all 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(254,252,248,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(181,97,58,0.15);
+    padding: 10px 32px;
+    box-shadow: 0 2px 20px rgba(61,43,31,0.08);
+  }
+  .nav-logo {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.8rem;
+    color: var(--terracota);
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--texto);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--terracota); }
+  .nav-toggle {
+    display: none;
+    flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px;
+  }
+  .nav-toggle span {
+    display: block; width: 24px; height: 1.5px; background: var(--texto); transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 99;
+    background: var(--branco);
+    flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--texto); text-decoration: none; font-weight: 300;
+  }
+  .mobile-close {
+    position: absolute; top: 20px; right: 28px;
+    background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--texto);
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative; min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    overflow: hidden; text-align: center;
+    background: var(--bege);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 80%, rgba(107,124,92,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(181,97,58,0.1) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 50%, rgba(234,217,197,0.4) 0%, transparent 70%);
+  }
+  .hero-texture {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+  .hero-ornament {
+    position: absolute; opacity: 0.08;
+    font-size: 40vw; line-height: 1;
+    font-family: 'Great Vibes', cursive;
+    color: var(--terracota);
+    pointer-events: none; user-select: none;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+  }
+  .hero-content { position: relative; z-index: 2; padding: 100px 24px 60px; }
+  .hero-pre {
+    font-size: 0.68rem; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--verde-oliva); margin-bottom: 12px; font-weight: 400;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-names {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    color: var(--marrom);
+    line-height: 1.1;
+    opacity: 0; animation: fadeUp 0.9s 0.4s forwards;
+  }
+  .hero-divider {
+    display: flex; align-items: center; gap: 16px;
+    margin: 20px auto; max-width: 320px;
+    opacity: 0; animation: fadeUp 0.9s 0.6s forwards;
+  }
+  .hero-divider-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--terracota-claro), transparent); }
+  .hero-divider svg { fill: var(--terracota-claro); width: 20px; height: 20px; }
+  .hero-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--texto-suave); font-weight: 300; letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0; animation: fadeUp 0.9s 0.7s forwards;
+  }
+  .hero-verse {
+    margin: 28px auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: clamp(0.85rem, 2vw, 1rem);
+    color: var(--texto-suave); max-width: 420px; line-height: 1.8;
+    opacity: 0; animation: fadeUp 0.9s 0.85s forwards;
+  }
+  .verse-ref {
+    display: block; font-style: normal;
+    font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--verde-oliva); margin-top: 6px;
+  }
+
+  /* COUNTDOWN */
+  .countdown {
+    display: flex; gap: 12px; justify-content: center;
+    margin: 32px 0;
+    opacity: 0; animation: fadeUp 0.9s 1s forwards;
+  }
+  .cd-item {
+    display: flex; flex-direction: column; align-items: center;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(181,97,58,0.2);
+    border-radius: 8px;
+    padding: 16px 18px; min-width: 70px;
+  }
+  .cd-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 500; line-height: 1;
+    color: var(--terracota);
+  }
+  .cd-label {
+    font-size: 0.58rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--texto-suave); margin-top: 4px; font-weight: 400;
+  }
+
+  .hero-btns {
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.9s 1.2s forwards;
+    margin-top: 8px;
+  }
+  .btn-primary {
+    background: var(--terracota);
+    color: #fff; border: none; padding: 14px 32px;
+    font-family: 'Jost', sans-serif; font-size: 0.72rem;
+    letter-spacing: 3px; text-transform: uppercase; font-weight: 400;
+    cursor: pointer; border-radius: 2px;
+    text-decoration: none; display: inline-block;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(181,97,58,0.3);
+  }
+  .btn-primary:hover {
+    background: var(--marrom);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(181,97,58,0.35);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--marrom); border: 1px solid rgba(107,68,35,0.4);
+    padding: 13px 32px;
+    font-family: 'Jost', sans-serif; font-size: 0.72rem;
+    letter-spacing: 3px; text-transform: uppercase; font-weight: 400;
+    cursor: pointer; border-radius: 2px;
+    text-decoration: none; display: inline-block;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover {
+    border-color: var(--terracota); color: var(--terracota);
+    transform: translateY(-2px);
+  }
+  .hero-scroll {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0; animation: fadeIn 1s 1.6s forwards;
+  }
+  .hero-scroll span {
+    font-size: 0.58rem; letter-spacing: 3px; text-transform: uppercase; color: var(--texto-suave);
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--terracota-claro), transparent);
+    animation: scrollPulse 2s 2s infinite;
+  }
+
+  /* ─── PHOTO PLACEHOLDER ─── */
+  .hero-photo {
+    position: relative; margin-bottom: 32px;
+    opacity: 0; animation: fadeUp 0.9s 0.3s forwards;
+  }
+  .photo-frame {
+    width: 180px; height: 220px;
+    border-radius: 100px 100px 0 0;
+    background: linear-gradient(145deg, var(--bege-escuro), var(--marrom-claro) 60%, var(--terracota) 100%);
+    margin: 0 auto; position: relative; overflow: hidden;
+    border: 3px solid rgba(181,97,58,0.25);
+    box-shadow: 0 20px 60px rgba(61,43,31,0.2);
+  }
+  .photo-inner {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px;
+  }
+  .photo-icon { font-size: 3rem; opacity: 0.5; }
+  .photo-text {
+    font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.6); font-weight: 300; text-align: center; padding: 0 16px;
+  }
+  .photo-ring {
+    position: absolute; top: -12px; right: -12px;
+    width: 80px; height: 80px; border-radius: 50%;
+    border: 1px solid rgba(181,97,58,0.3);
+  }
+
+  /* ─── SECTIONS COMMON ─── */
+  section { padding: 100px 24px; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .section-badge {
+    font-size: 0.65rem; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--verde-oliva); margin-bottom: 14px; font-weight: 400;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--marrom); font-weight: 400;
+    line-height: 1.2; margin-bottom: 20px;
+  }
+  .section-title em { font-style: italic; color: var(--terracota); }
+  .section-divider {
+    width: 60px; height: 1px; background: var(--terracota-claro);
+    margin: 0 auto 40px;
+  }
+  .section-divider.left { margin-left: 0; }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── HISTÓRIA ─── */
+  #historia { background: var(--branco); }
+  .timeline { position: relative; max-width: 680px; margin: 0 auto; }
+  .timeline::before {
+    content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+    width: 1px; background: linear-gradient(to bottom, transparent, var(--terracota-claro) 10%, var(--terracota-claro) 90%, transparent);
+    transform: translateX(-50%);
+  }
+  .tl-item {
+    display: flex; gap: 40px;
+    margin-bottom: 56px; position: relative;
+    align-items: flex-start;
+  }
+  .tl-item:nth-child(odd) { flex-direction: row-reverse; }
+  .tl-item:nth-child(odd) .tl-content { text-align: right; }
+  .tl-item:nth-child(odd) .tl-year-wrap { align-items: flex-end; }
+  .tl-dot {
+    position: absolute; left: 50%; top: 6px; transform: translateX(-50%);
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--terracota); z-index: 2;
+    box-shadow: 0 0 0 4px rgba(181,97,58,0.2);
+  }
+  .tl-content { flex: 1; }
+  .tl-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 500;
+    color: var(--terracota); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .tl-icon {
+    font-size: 1.2rem; margin-bottom: 6px; display: block;
+  }
+  .tl-text {
+    font-size: 0.88rem; line-height: 1.7;
+    color: var(--texto-suave); font-weight: 300;
+  }
+
+  /* ─── CERIMÔNIA / RECEPÇÃO ─── */
+  #cerimonia { background: var(--bege); }
+  #recepcao { background: var(--branco); }
+  .event-card {
+    background: var(--branco);
+    border: 1px solid rgba(181,97,58,0.15);
+    border-radius: 4px;
+    padding: 48px 40px; text-align: center;
+    position: relative; overflow: hidden;
+    box-shadow: 0 8px 40px rgba(61,43,31,0.07);
+  }
+  .event-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(to right, var(--verde-oliva), var(--terracota), var(--verde-oliva));
+  }
+  .event-icon {
+    font-size: 2.2rem; margin-bottom: 20px; display: block;
+  }
+  .event-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; color: var(--marrom); margin-bottom: 6px;
+    font-style: italic;
+  }
+  .event-time {
+    font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--terracota); margin-bottom: 20px; font-weight: 400;
+  }
+  .event-address {
+    font-size: 0.88rem; line-height: 1.8; color: var(--texto-suave);
+    font-weight: 300; margin-bottom: 28px;
+  }
+  .btn-map {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--verde-oliva); color: #fff;
+    padding: 12px 28px; border-radius: 2px;
+    font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+    text-decoration: none; font-weight: 400;
+    transition: all 0.3s;
+  }
+  .btn-map:hover { background: var(--marrom); transform: translateY(-2px); }
+
+  /* ─── CONFIRMAÇÃO ─── */
+  #confirmacao {
+    background: linear-gradient(135deg, var(--marrom) 0%, #2D1810 100%);
+    text-align: center; padding: 100px 24px;
+    position: relative; overflow: hidden;
+  }
+  #confirmacao::before {
+    content: '♥';
+    position: absolute; font-size: 50vw;
+    opacity: 0.03; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--terracota-claro); pointer-events: none;
+  }
+  #confirmacao .section-badge { color: rgba(234,217,197,0.6); }
+  #confirmacao .section-title { color: var(--bege-escuro); }
+  #confirmacao .section-divider { background: var(--terracota-claro); }
+  .confirm-text {
+    color: rgba(234,217,197,0.7); font-size: 0.92rem;
+    max-width: 420px; margin: 0 auto 36px; line-height: 1.8; font-weight: 300;
+  }
+  .btn-whatsapp {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: #25D366; color: #fff;
+    padding: 18px 44px; border-radius: 2px;
+    font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase;
+    text-decoration: none; font-weight: 400;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(37,211,102,0.3);
+  }
+  .btn-whatsapp:hover { background: #1DA851; transform: translateY(-3px); box-shadow: 0 14px 40px rgba(37,211,102,0.4); }
+  .wpp-icon { font-size: 1.3rem; }
+
+  /* ─── PRESENTES ─── */
+  #presentes { background: var(--bege); }
+  .gifts-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px; margin-top: 48px;
+  }
+  .gift-card {
+    background: var(--branco); border: 1px solid rgba(181,97,58,0.12);
+    border-radius: 4px; padding: 28px 22px;
+    display: flex; flex-direction: column;
+    transition: all 0.3s; cursor: pointer;
+    position: relative; overflow: hidden;
+  }
+  .gift-card::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 2px;
+    background: linear-gradient(to right, var(--terracota), var(--verde-oliva));
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  .gift-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(61,43,31,0.1); }
+  .gift-card:hover::after { transform: scaleX(1); }
+  .gift-icon { font-size: 1.8rem; margin-bottom: 12px; }
+  .gift-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; color: var(--marrom); margin-bottom: 4px; flex: 1;
+  }
+  .gift-value {
+    font-size: 1.2rem; font-weight: 500;
+    color: var(--terracota); margin-bottom: 16px;
+  }
+  .btn-gift {
+    background: transparent; border: 1px solid rgba(181,97,58,0.3);
+    color: var(--terracota); padding: 9px 20px; border-radius: 2px;
+    font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
+    cursor: pointer; font-family: 'Jost', sans-serif; font-weight: 400;
+    transition: all 0.3s; width: 100%;
+  }
+  .btn-gift:hover { background: var(--terracota); color: #fff; border-color: var(--terracota); }
+
+  /* ─── MODAL ─── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(30,15,5,0.65); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--branco); border-radius: 6px;
+    max-width: 480px; width: 100%; max-height: 90vh; overflow-y: auto;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(30,15,5,0.3);
+    animation: modalIn 0.3s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .modal-header {
+    padding: 32px 32px 0;
+    border-bottom: 1px solid rgba(181,97,58,0.12);
+    padding-bottom: 24px; margin-bottom: 28px;
+    position: relative;
+  }
+  .modal-close {
+    position: absolute; top: 20px; right: 20px;
+    background: none; border: none; font-size: 1.4rem; cursor: pointer;
+    color: var(--texto-suave); line-height: 1;
+  }
+  .modal-gift-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: var(--marrom); margin-bottom: 4px;
+  }
+  .modal-gift-value { color: var(--terracota); font-weight: 500; font-size: 1.1rem; }
+  .modal-body { padding: 0 32px 32px; }
+  .payment-tabs {
+    display: flex; gap: 0; margin-bottom: 28px;
+    border: 1px solid rgba(181,97,58,0.2); border-radius: 3px; overflow: hidden;
+  }
+  .tab-btn {
+    flex: 1; padding: 12px 8px;
+    font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+    background: transparent; border: none; cursor: pointer;
+    font-family: 'Jost', sans-serif; transition: all 0.25s; color: var(--texto-suave);
+  }
+  .tab-btn.active { background: var(--terracota); color: #fff; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .pix-section { text-align: center; }
+  .pix-key-label {
+    font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--texto-suave); margin-bottom: 10px; display: block;
+  }
+  .pix-key {
+    background: var(--bege); border: 1px solid rgba(181,97,58,0.15);
+    border-radius: 3px; padding: 14px 20px;
+    font-family: monospace; font-size: 0.75rem; color: var(--marrom);
+    word-break: break-all; margin-bottom: 20px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .pix-key:hover { border-color: var(--terracota); }
+  .btn-copy {
+    width: 100%; padding: 12px; background: var(--verde-oliva); color: #fff;
+    border: none; border-radius: 2px; cursor: pointer;
+    font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+    font-family: 'Jost', sans-serif; transition: all 0.3s;
+  }
+  .btn-copy:hover { background: var(--marrom); }
+  .copy-feedback {
+    font-size: 0.75rem; color: var(--verde-oliva); text-align: center;
+    margin-top: 10px; height: 20px; transition: opacity 0.3s;
+  }
+  .qr-placeholder {
+    width: 160px; height: 160px; margin: 0 auto 20px;
+    background: var(--bege); border: 1px solid rgba(181,97,58,0.2);
+    border-radius: 4px; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 6px;
+  }
+  .qr-placeholder span { font-size: 0.65rem; letter-spacing: 1px; color: var(--texto-suave); text-align: center; }
+  .qr-grid {
+    display: grid; grid-template-columns: repeat(8, 1fr); gap: 2px;
+    width: 90px; height: 90px;
+  }
+  .qr-cell { border-radius: 1px; }
+  .card-section { text-align: center; }
+  .card-text {
+    font-size: 0.88rem; color: var(--texto-suave); line-height: 1.7;
+    margin-bottom: 24px; font-weight: 300;
+  }
+  .btn-card {
+    display: inline-block; background: #009EE3; color: #fff;
+    padding: 14px 36px; border-radius: 2px; text-decoration: none;
+    font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+    font-weight: 400; transition: all 0.3s; width: 100%; text-align: center;
+  }
+  .btn-card:hover { background: #007BB5; transform: translateY(-2px); }
+  .mp-logo { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; }
+  .mp-logo span { font-size: 0.65rem; color: var(--texto-suave); letter-spacing: 1px; }
+
+  /* ─── MAPA ─── */
+  #mapa { background: var(--branco); padding: 100px 24px; }
+  .maps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+  .map-box { border-radius: 4px; overflow: hidden; border: 1px solid rgba(181,97,58,0.15); }
+  .map-label {
+    background: var(--bege); padding: 16px 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .map-label-icon { font-size: 1.2rem; }
+  .map-label-text { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--marrom); }
+  .map-label-sub { font-size: 0.72rem; color: var(--texto-suave); letter-spacing: 1px; }
+  .map-frame { width: 100%; height: 250px; border: none; display: block; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--marrom); color: rgba(234,217,197,0.7);
+    text-align: center; padding: 60px 24px;
+    position: relative; overflow: hidden;
+  }
+  footer::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 1px; background: linear-gradient(to right, transparent, var(--terracota-claro), transparent);
+  }
+  .footer-names {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    color: var(--bege-escuro); margin-bottom: 8px;
+  }
+  .footer-date {
+    font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase;
+    color: rgba(234,217,197,0.5); margin-bottom: 20px;
+  }
+  .footer-divider {
+    width: 40px; height: 1px; background: rgba(181,97,58,0.5);
+    margin: 0 auto 20px;
+  }
+  .footer-msg { font-size: 0.88rem; font-weight: 300; line-height: 1.8; max-width: 380px; margin: 0 auto; }
+  .footer-hearts { margin-top: 24px; font-size: 1rem; letter-spacing: 8px; opacity: 0.4; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.5; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+    .timeline::before { left: 20px; }
+    .tl-item, .tl-item:nth-child(odd) { flex-direction: column; padding-left: 50px; }
+    .tl-item:nth-child(odd) .tl-content { text-align: left; }
+    .tl-item:nth-child(odd) .tl-year-wrap { align-items: flex-start; }
+    .tl-dot { left: 20px; }
+    .maps-grid { grid-template-columns: 1fr; }
+    .countdown { gap: 8px; }
+    .cd-item { padding: 12px 14px; min-width: 62px; }
+    nav { padding: 14px 20px; }
+    nav.scrolled { padding: 8px 20px; }
+  }
+  @media (max-width: 480px) {
+    .hero-btns { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-outline { width: 240px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">D & A</a>
+  <ul class="nav-links">
+    <li><a href="#historia">Nossa História</a></li>
+    <li><a href="#cerimonia">Cerimônia</a></li>
+    <li><a href="#recepcao">Recepção</a></li>
+    <li><a href="#confirmacao">Confirmar</a></li>
+    <li><a href="#presentes">Presentes</a></li>
+    <li><a href="#mapa">Local</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">×</button>
+  <a href="#historia" onclick="toggleMenu()">Nossa História</a>
+  <a href="#cerimonia" onclick="toggleMenu()">Cerimônia</a>
+  <a href="#recepcao" onclick="toggleMenu()">Recepção</a>
+  <a href="#confirmacao" onclick="toggleMenu()">Confirmar Presença</a>
+  <a href="#presentes" onclick="toggleMenu()">Lista de Presentes</a>
+  <a href="#mapa" onclick="toggleMenu()">Local</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-texture"></div>
+  <div class="hero-ornament">♥</div>
+  <div class="hero-content">
+    <div class="hero-photo">
+      <div class="photo-frame">
+        <div class="photo-inner">
+          <span class="photo-icon">💑</span>
+          <span class="photo-text">Adicione sua foto aqui</span>
+        </div>
+      </div>
+      <div class="photo-ring"></div>
+    </div>
+    <p class="hero-pre">Celebração do amor</p>
+    <h1 class="hero-names">Daniela &amp; Amauri</h1>
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <svg viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
+      <div class="hero-divider-line"></div>
+    </div>
+    <p class="hero-date">27 de junho de 2026 · Fortaleza – CE</p>
+    <p class="hero-verse">
+      "Assim, eles já não são dois, mas sim uma só carne. Portanto, o que Deus uniu, ninguém separe."
+      <span class="verse-ref">— Mateus 19:6</span>
+    </p>
+    <div class="countdown">
+      <div class="cd-item"><span class="cd-num" id="cd-days">--</span><span class="cd-label">Dias</span></div>
+      <div class="cd-item"><span class="cd-num" id="cd-hours">--</span><span class="cd-label">Horas</span></div>
+      <div class="cd-item"><span class="cd-num" id="cd-mins">--</span><span class="cd-label">Min</span></div>
+      <div class="cd-item"><span class="cd-num" id="cd-secs">--</span><span class="cd-label">Seg</span></div>
+    </div>
+    <div class="hero-btns">
+      <a href="#confirmacao" class="btn-primary">Confirmar Presença</a>
+      <a href="#presentes" class="btn-outline">Lista de Presentes</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Role para baixo</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- HISTÓRIA -->
+<section id="historia">
+  <div class="section-inner">
+    <div style="text-align:center" class="reveal">
+      <span class="section-badge">Uma história de amor</span>
+      <h2 class="section-title">Nossa <em>História</em></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-content">
+          <div class="tl-year">1993</div>
+          <span class="tl-icon">🌱</span>
+          <p class="tl-text">Nascemos no mesmo ano. O universo já preparava o encontro de duas almas destinadas a se encontrar.</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-content"></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-content"></div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-year">2008</div>
+          <span class="tl-icon">📚</span>
+          <p class="tl-text">Nos conhecemos no colegial como amigos. Uma amizade que plantou as sementes de algo muito maior.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-content">
+          <div class="tl-year">2009</div>
+          <span class="tl-icon">💕</span>
+          <p class="tl-text">Início do namoro adolescente. Descobrimos que a amizade tinha se transformado em amor.</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-content"></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-content"></div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-year">2011</div>
+          <span class="tl-icon">🎓</span>
+          <p class="tl-text">Fomos para a faculdade e continuamos juntos. Crescemos, aprendemos e nos tornamos quem somos um ao lado do outro.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-content">
+          <div class="tl-year">2019</div>
+          <span class="tl-icon">🕊️</span>
+          <p class="tl-text">Passamos por um momento muito difícil com a perda do pai do noivo. Unidos na dor, nosso amor se tornou ainda mais forte.</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-content"></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-content"></div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-year">2022</div>
+          <span class="tl-icon">🏡</span>
+          <p class="tl-text">Compramos o terreno para construir nossa casa. O primeiro tijolo do nosso lar e do nosso futuro juntos.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-content">
+          <div class="tl-year">2024</div>
+          <span class="tl-icon">🔑</span>
+          <p class="tl-text">Concluímos a construção do nosso lar. Cada cômodo construído com amor, cada detalhe pensado juntos.</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-content"></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-content"></div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-year">2025</div>
+          <span class="tl-icon">💍</span>
+          <p class="tl-text">Nos casamos no civil. Oficializamos perante a lei o que os nossos corações já sabiam há muito tempo.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-content">
+          <div class="tl-year">2026</div>
+          <span class="tl-icon">⛪</span>
+          <p class="tl-text">Iremos celebrar nosso casamento religioso. A benção de Deus e a alegria de compartilhar com quem amamos.</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-content"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERIMÔNIA -->
+<section id="cerimonia">
+  <div class="section-inner">
+    <div style="text-align:center" class="reveal">
+      <span class="section-badge">Nos une perante Deus</span>
+      <h2 class="section-title"><em>Cerimônia</em></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="event-card reveal">
+      <span class="event-icon">⛪</span>
+      <div class="event-name">Capela da Igreja Nossa Senhora da Glória</div>
+      <div class="event-time">⏰ &nbsp; 19h30 · 27 de Junho de 2026</div>
+      <div class="event-address">
+        Av. Oliveira Paiva, 905<br>
+        Cidade dos Funcionários<br>
+        Fortaleza – CE, 60822-130
+      </div>
+      <a href="https://maps.google.com/?q=Av.+Oliveira+Paiva,+905,+Fortaleza,+CE" target="_blank" class="btn-map">
+        📍 &nbsp; Ver no Google Maps
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- RECEPÇÃO -->
+<section id="recepcao">
+  <div class="section-inner">
+    <div style="text-align:center" class="reveal">
+      <span class="section-badge">É hora de comemorar</span>
+      <h2 class="section-title"><em>Recepção</em></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="event-card reveal">
+      <span class="event-icon">🥂</span>
+      <div class="event-name">Lounge Buffet</div>
+      <div class="event-time">⏰ &nbsp; 22h00 · 27 de Junho de 2026</div>
+      <div class="event-address">
+        Av. Desembargador Gonzaga, 675<br>
+        Cidade dos Funcionários<br>
+        Fortaleza – CE, 60823-000
+      </div>
+      <a href="https://maps.google.com/?q=Av.+Desembargador+Gonzaga,+675,+Fortaleza,+CE" target="_blank" class="btn-map">
+        📍 &nbsp; Ver no Google Maps
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONFIRMAÇÃO -->
+<section id="confirmacao">
+  <div class="section-inner" style="position:relative;z-index:2">
+    <div class="reveal">
+      <span class="section-badge">Você está convidado</span>
+      <h2 class="section-title" style="color:var(--bege-escuro)">Confirme sua <em style="color:var(--terracota-claro)">Presença</em></h2>
+      <div class="section-divider" style="background:var(--terracota-claro)"></div>
+    </div>
+    <p class="confirm-text reveal">
+      Sua presença é o presente mais especial que poderíamos receber.<br>
+      Confirme até 20 de junho de 2026.
+    </p>
+    <div class="reveal">
+      <a
+        href="https://wa.me/5585988341614?text=Ol%C3%A1!%20Estou%20confirmando%20presen%C3%A7a%20no%20casamento%20de%20Daniela%20e%20Amauri."
+        target="_blank" class="btn-whatsapp">
+        <span class="wpp-icon">💬</span>
+        Confirmar Presença via WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PRESENTES -->
+<section id="presentes">
+  <div class="section-inner">
+    <div style="text-align:center" class="reveal">
+      <span class="section-badge">Um gesto de carinho</span>
+      <h2 class="section-title">Lista de <em>Presentes</em></h2>
+      <div class="section-divider"></div>
+      <p style="color:var(--texto-suave);font-size:0.9rem;font-weight:300;max-width:500px;margin:0 auto;line-height:1.8">
+        Sua presença já é tudo para nós. Se desejar nos presentear, preparamos uma lista especial com experiências e contribuições para nossa nova vida.
+      </p>
+    </div>
+    <div class="gifts-grid" id="giftsGrid"></div>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section id="mapa">
+  <div class="section-inner">
+    <div style="text-align:center" class="reveal">
+      <span class="section-badge">Como chegar</span>
+      <h2 class="section-title">Os <em>Locais</em></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="maps-grid reveal">
+      <div class="map-box">
+        <div class="map-label">
+          <span class="map-label-icon">⛪</span>
+          <div>
+            <div class="map-label-text">Cerimônia</div>
+            <div class="map-label-sub">Igreja Nossa Senhora da Glória</div>
+          </div>
+        </div>
+        <iframe
+          class="map-frame"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Av.+Oliveira+Paiva,+905,+Fortaleza,+CE&output=embed"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="map-box">
+        <div class="map-label">
+          <span class="map-label-icon">🥂</span>
+          <div>
+            <div class="map-label-text">Recepção</div>
+            <div class="map-label-sub">Lounge Buffet</div>
+          </div>
+        </div>
+        <iframe
+          class="map-frame"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Av.+Desembargador+Gonzaga,+675,+Fortaleza,+CE&output=embed"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-names">Daniela &amp; Amauri</div>
+  <div class="footer-date">27 de Junho de 2026 · Fortaleza – CE</div>
+  <div class="footer-divider"></div>
+  <p class="footer-msg">Estamos muito felizes em compartilhar esse momento especial com você.</p>
+  <div class="footer-hearts">♥ &nbsp; ♥ &nbsp; ♥</div>
+</footer>
+
+<!-- MODAL PRESENTE -->
+<div class="modal-overlay" id="giftModal">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <div class="modal-gift-name" id="modal-name">–</div>
+      <div class="modal-gift-value" id="modal-value">–</div>
+    </div>
+    <div class="modal-body">
+      <div class="payment-tabs">
+        <button class="tab-btn active" onclick="switchTab('pix', this)">💚 PIX</button>
+        <button class="tab-btn" onclick="switchTab('card', this)">💳 Cartão</button>
+      </div>
+      <div class="tab-content active" id="tab-pix">
+        <div class="pix-section">
+          <div class="qr-placeholder" id="qrCode">
+            <div class="qr-grid" id="qrGrid"></div>
+            <span>QR Code PIX</span>
+          </div>
+          <span class="pix-key-label">Chave PIX (UUID)</span>
+          <div class="pix-key" id="pixKeyDisplay" onclick="copyPix()">
+            da1d7878-07e3-4cf6-8758-b2d99b2bf07b
+          </div>
+          <button class="btn-copy" onclick="copyPix()">Copiar chave PIX</button>
+          <div class="copy-feedback" id="copyFeedback"></div>
+        </div>
+      </div>
+      <div class="tab-content" id="tab-card">
+        <div class="card-section">
+          <p class="card-text">Pague com cartão de crédito ou débito de forma rápida e segura pelo Mercado Pago.</p>
+          <a href="https://link.mercadopago.com.br/casamentoamauridani" target="_blank" class="btn-card">
+            Pagar com Cartão
+          </a>
+          <div class="mp-logo">
+            <span>Pagamento seguro via Mercado Pago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── COUNTDOWN ───
+function updateCountdown() {
+  const target = new Date('2026-06-27T19:30:00-03:00');
+  const now = new Date();
+  const diff = target - now;
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent = '0';
+    document.getElementById('cd-hours').textContent = '0';
+    document.getElementById('cd-mins').textContent = '0';
+    document.getElementById('cd-secs').textContent = '0';
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ─── NAV SCROLL ───
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ─── MOBILE MENU ───
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// ─── REVEAL ON SCROLL ───
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(r => observer.observe(r));
+
+// ─── GIFTS ───
+const gifts = [
+  { icon: '🍽️', name: 'Jantar romântico', value: 100 },
+  { icon: '🎬', name: 'Cinema na lua de mel', value: 150 },
+  { icon: '🌅', name: 'Passeio especial', value: 200 },
+  { icon: '🎨', name: 'Ajuda na decoração da casa', value: 250 },
+  { icon: '✈️', name: 'Passeio na lua de mel', value: 300 },
+  { icon: '🍷', name: 'Experiência gastronômica', value: 350 },
+  { icon: '🌙', name: 'Noite especial na viagem', value: 400 },
+  { icon: '🏠', name: 'Contribuição para eletrodomésticos', value: 450 },
+  { icon: '🗺️', name: 'Passeio turístico', value: 500 },
+  { icon: '🛋️', name: 'Ajuda na mobília', value: 550 },
+  { icon: '⭐', name: 'Experiência especial', value: 600 },
+  { icon: '🔨', name: 'Ajuda para reforma da casa', value: 650 },
+  { icon: '🌊', name: 'Passeio inesquecível', value: 700 },
+  { icon: '💝', name: 'Ajuda na lua de mel', value: 750 },
+  { icon: '🎁', name: 'Presente especial', value: 800 },
+  { icon: '☕', name: 'Kit café da manhã especial', value: 120 },
+  { icon: '🌸', name: 'Arranjo floral para o lar', value: 180 },
+  { icon: '🧴', name: 'Kit spa para o casal', value: 280 },
+  { icon: '📸', name: 'Sessão fotográfica', value: 520 },
+  { icon: '🎶', name: 'Serenata surpresa', value: 380 },
+];
+
+const grid = document.getElementById('giftsGrid');
+gifts.forEach(g => {
+  const card = document.createElement('div');
+  card.className = 'gift-card';
+  card.innerHTML = `
+    <span class="gift-icon">${g.icon}</span>
+    <div class="gift-name">${g.name}</div>
+    <div class="gift-value">R$ ${g.value.toFixed(2).replace('.',',')}</div>
+    <button class="btn-gift" onclick="openModal('${g.name}', 'R$ ${g.value.toFixed(2).replace('.',',')}')">Presentear</button>
+  `;
+  grid.appendChild(card);
+});
+
+// ─── MODAL ───
+function openModal(name, value) {
+  document.getElementById('modal-name').textContent = name;
+  document.getElementById('modal-value').textContent = value;
+  document.getElementById('giftModal').classList.add('open');
+  generateQR();
+  // reset tabs
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelector('.tab-btn').classList.add('active');
+  document.getElementById('tab-pix').classList.add('active');
+  document.getElementById('copyFeedback').textContent = '';
+}
+function closeModal() {
+  document.getElementById('giftModal').classList.remove('open');
+}
+document.getElementById('giftModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+function copyPix() {
+  const key = 'da1d7878-07e3-4cf6-8758-b2d99b2bf07b';
+  navigator.clipboard.writeText(key).then(() => {
+    const fb = document.getElementById('copyFeedback');
+    fb.textContent = '✓ Chave copiada com sucesso!';
+    setTimeout(() => fb.textContent = '', 2500);
+  });
+}
+
+// ─── SIMPLE QR VISUAL ───
+function generateQR() {
+  const grid = document.getElementById('qrGrid');
+  grid.innerHTML = '';
+  // Simple decorative QR-like pattern
+  const pattern = [
+    1,1,1,1,1,1,1,0,
+    1,0,0,0,0,0,1,0,
+    1,0,1,1,1,0,1,0,
+    1,0,1,0,1,0,1,0,
+    1,0,1,1,1,0,1,0,
+    1,0,0,0,0,0,1,0,
+    1,1,1,1,1,1,1,0,
+    0,1,0,1,0,1,0,1,
+  ];
+  pattern.forEach(v => {
+    const cell = document.createElement('div');
+    cell.className = 'qr-cell';
+    cell.style.background = v ? 'var(--marrom)' : 'transparent';
+    grid.appendChild(cell);
+  });
+}
+</script>
+</body>
+</html>
